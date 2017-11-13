@@ -14,7 +14,7 @@ const mutation = new GraphQLObjectType({
         content: { type: GraphQLString},
       },
       resolve(parentValue, {title, content}) {
-        return new Menu({title, content}).save
+        return (new Menu({title, content})).save()
       }
     }
   }
