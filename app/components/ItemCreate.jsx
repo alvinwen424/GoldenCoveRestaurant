@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import fetchMenu from '../queries/fetchMenu.js'
-import { BrowserHistory as history} from 'react-router-dom'
+// import { BrowserHistory as history} from 'react-router-dom'
+import history from '../history'
 
 class AddItem extends Component {
   constructor (){
@@ -22,7 +23,7 @@ class AddItem extends Component {
       },
       refetchQueries: [{query: fetchMenu }]
     })
-    // .then(() => history.push("/"))
+    .then(() => history.push("/menu"))
   }
 
   render() {
