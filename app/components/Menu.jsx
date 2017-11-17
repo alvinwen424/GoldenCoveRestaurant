@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetchMenu from '../queries/fetchMenu.js'
 import { graphql } from 'react-apollo'
+import { Link } from 'react-router-dom'
 
 class Menu extends Component {
 
@@ -20,6 +21,7 @@ class Menu extends Component {
           )
         })}
         </ul>
+        <Link to="/itemCreate"> Create New Item </Link>
       </div>
     )
   }

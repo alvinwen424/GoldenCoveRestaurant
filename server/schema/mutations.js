@@ -10,8 +10,9 @@ const mutation = new GraphQLObjectType({
     addItem: {
       type: menuType,
       args: {
-        name: { type: GraphQLString},
-        content: { type: GraphQLString},
+        name: { type: GraphQLString },
+        content: { type: GraphQLString },
+        image: { type: GraphQLString }
       },
       resolve(parentValue, {name, content}) {
         return (new Menu({name, content})).save()
