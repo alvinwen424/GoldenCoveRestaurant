@@ -36,6 +36,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.1",
+    "bootstrap": "^3.3.7",
     "connect-mongo": "^1.3.2",
     "express": "^4.15.4",
     "express-graphql": "^0.6.1",

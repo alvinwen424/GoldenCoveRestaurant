@@ -5,18 +5,22 @@ import NotFound from './NotFound'
 import Nav from './Nav'
 import Menu from './Menu'
 import ItemCreate from './ItemCreate'
+import SingleItem from './SingleItem'
 
 class Routes extends Component {
   render () {
     return (
       <div>
         <Nav />
-        <Switch>
-          <Route path="/itemCreate" component={ItemCreate} />
-          <Route path="/menu" component={Menu} />
-          <Route path="/" component={Home} />
-          <Route path="*" component={NotFound} />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route path="/itemCreate" component={ItemCreate} />
+            <Route path="/SingleItem/:itemId" component={SingleItem} />
+            <Route path="/menu" component={Menu} />
+            <Route path="/" component={Home} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </div>
       </div>
     )
   }

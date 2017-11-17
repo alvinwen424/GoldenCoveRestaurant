@@ -10,12 +10,12 @@ class Menu extends Component {
     const { menu } = this.props.data
     return (
       <div>
-        <div>Menu</div>
+        <div><h1>Menu</h1></div>
         <ul>
         {menu.map(item => {
           return (
             <li key={item.id}>
-              <h1>{item.name}</h1>
+              <Link to={`/SingleItem/${item.id}`}><h1>{item.name}</h1></Link>
               <h3>{item.content}</h3>
             </li>
           )
@@ -28,5 +28,4 @@ class Menu extends Component {
 }
 
 export default graphql(fetchMenu)(Menu)
-
 
