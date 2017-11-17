@@ -1,4 +1,25 @@
+body {
+	background: lightyellow;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
+}
+
+img {
+	height: 100px;
+	width: 100px;
+}
+
+.menu-item {
+	background: white;
+	width: 30%;
+	height: 30%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	flex-wrap: wrap;
+	padding: 10px;
+	margin: 10px;
 }

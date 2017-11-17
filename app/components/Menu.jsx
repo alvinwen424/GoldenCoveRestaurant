@@ -14,14 +14,16 @@ class Menu extends Component {
         <ul>
         {menu.map(item => {
           return (
-            <li key={item.id}>
-              <Link to={`/SingleItem/${item.id}`}><h1>{item.name}</h1></Link>
-              <h3>{item.content}</h3>
-            </li>
+            <div key={item.id} className="menu-item col-md-4">
+              <li>
+                <Link to={`/SingleItem/${item.id}`}><h2>{item.name}</h2></Link>
+                <img src="/img/sampleImage.png" className="products_image img-responsive img-center" />
+                <h4>{item.content}</h4>
+              </li>
+            </div>
           )
         })}
         </ul>
-        <Link to="/itemCreate"> Create New Item </Link>
       </div>
     )
   }
