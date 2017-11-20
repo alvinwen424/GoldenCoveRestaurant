@@ -40,6 +40,7 @@ class AddItem extends Component {
             />
           <button id="submit">Submit</button>
         </form>
+        <canvas id="myCanvas" width="200" height="100"></canvas>
       </div>
     )
   }

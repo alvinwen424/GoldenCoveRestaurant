@@ -15,7 +15,7 @@ class Routes extends Component {
         <div className="container">
           <Switch>
             <Route path="/itemCreate" component={ItemCreate} />
-            <Route path="/SingleItem/:itemId" component={SingleItem} />
+            <Route path="/SingleItem/:id" component={SingleItem} />
             <Route path="/menu" component={Menu} />
             <Route path="/" component={Home} />
             <Route path="*" component={NotFound} />
