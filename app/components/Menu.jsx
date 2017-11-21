@@ -11,19 +11,17 @@ class Menu extends Component {
     return (
       <div>
         <div><h1>Menu</h1></div>
-        <ul>
+        <div className="menu-list">
         {menu.map(item => {
           return (
-            <div key={item.id} className="menu-item col-md-4">
-              <li>
+            <div key={item.id} className="menu-list-item">
                 <Link to={`/SingleItem/${item.id}`}><h2>{item.name}</h2></Link>
                 <img src="/img/sampleImage.png" className="products_image img-responsive img-center" />
                 <h4>{item.content}</h4>
-              </li>
             </div>
           )
         })}
-        </ul>
+        </div>
       </div>
     )
   }

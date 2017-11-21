@@ -12,16 +12,27 @@ img {
 	width: 100px;
 }
 
-.menu-item {
+ul {
+	list-style-type: none;
+}
+
+.menu-list {
+	display: flex;
+	justify-content: left;
+	flex-direction: row;
+	flex-wrap: wrap;
+	
+}
+
+.menu-list-item {
 	background: white;
-	width: 30%;
-	height: 30%;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	flex-wrap: wrap;
-	padding: 10px;
-	margin: 10px;
+	flex: 0 0 32%;
+	padding: 5px;
+	margin: 5px;
 }
 
 .single-item {
