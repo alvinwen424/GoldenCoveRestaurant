@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import history from '../history'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor (){
     super()
     this.state = {
@@ -14,7 +16,7 @@ export default class SignUp extends Component {
     event.preventDefault()
     const passwordOne = event.target.passwordOne.value
     const passwordTwo = event.target.passwordTwo.value
-    if (passwordOne === passwordTwo) return 'Password does not match!'
+    if (passwordOne !== passwordTwo) return 'Password does not match!'
 
     this.props.mutate({
       variables: {
@@ -76,3 +78,14 @@ export default class SignUp extends Component {
     )
   }
 }
+
+const mutation = gql`
+mutation SignUp($email: String, $password: String, $name: String){
+  signup(email: $email, name: $name, password: $password ){
+    name
+    email
+  }
+}
+`
+
+export default graphql(mutation)(SignUp)

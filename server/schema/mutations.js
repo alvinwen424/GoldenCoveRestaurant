@@ -1,5 +1,5 @@
 const graphql = require('graphql')
-const { GraphQLObjectType, GraphQLString, GraphQLID } = graphql
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLNonNull } = graphql
 const mongoose = require('mongoose')
 const Menu = mongoose.model('menu')
 const menuType = require('./menu_type')
@@ -23,11 +23,12 @@ const mutation = new GraphQLObjectType({
     signup: {
       type: UserType,
       args: {
-        email: { type: GraphQLString },
-        password: { type: GraphQLString }
+        email: { type: (GraphQLString) },
+        password: { type: (GraphQLString) },
+        name: { type: (GraphQLString) }
       },
-      resolve(parentValue, {email, password}, req) {
-         return AuthService.signup({email, password, req })
+      resolve(parentValue, {name, email, password}, req) {
+         return AuthService.signup({name, email, password, req })
       }
     }
   }
