@@ -23,3 +23,14 @@ img {
 	padding: 10px;
 	margin: 10px;
 }
+
+.single-item {
+	display: flex;
+	align-items: center;
+	width: default;
+	background: white;
+	justify-content: center;
+	padding: default;
+	margin: default;
+	flex-direction: column;
+}

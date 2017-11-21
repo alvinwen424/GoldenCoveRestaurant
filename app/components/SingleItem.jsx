@@ -9,10 +9,17 @@ class SingleItem extends Component {
     return (
       <div>
         { item &&
-          <div>
+          <div className="single-item col-large-4">
             <h1>
               {item.name}
             </h1>
+            <img
+              src="/img/sampleImage.png"
+              className="products_image img-responsive img-center"
+            />
+            <h3>
+              {item.content}
+            </h3>
           </div>
         }
       </div>
