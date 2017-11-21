@@ -7,7 +7,7 @@ class SingleItem extends Component {
   render() {
     const { item } = this.props.data
     return (
-      <div>
+      <div className="container">
         { item &&
           <div className="single-item col-large-4">
             <h1>
@@ -15,7 +15,7 @@ class SingleItem extends Component {
             </h1>
             <img
               src="/img/sampleImage.png"
-              className="products_image img-responsive img-center"
+              className="products_image img-responsive img-center single-item-image"
             />
             <h3>
               {item.content}

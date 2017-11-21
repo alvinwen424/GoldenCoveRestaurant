@@ -12,6 +12,11 @@ img {
 	width: 100px;
 }
 
+button {
+	padding: 10px 0 10px 0;
+	margin: 10px 0 10px 0;
+}
+
 ul {
 	list-style-type: none;
 }
@@ -36,12 +41,14 @@ ul {
 }
 
 .single-item {
-	display: flex;
-	align-items: center;
 	width: default;
 	background: white;
-	justify-content: center;
-	padding: default;
-	margin: default;
-	flex-direction: column;
 }
+
+single-item-image {
+	height: 500px;
+	width: 500px;
+}
+
+
+

@@ -6,6 +6,7 @@ import Nav from './Nav'
 import Menu from './Menu'
 import ItemCreate from './ItemCreate'
 import SingleItem from './SingleItem'
+import SignUp from './SignUp'
 
 class Routes extends Component {
   render () {
@@ -17,6 +18,7 @@ class Routes extends Component {
             <Route path="/itemCreate" component={ItemCreate} />
             <Route path="/SingleItem/:id" component={SingleItem} />
             <Route path="/menu" component={Menu} />
+            <Route path="/signup" component={SignUp} />
             <Route path="/" component={Home} />
             <Route path="*" component={NotFound} />
           </Switch>

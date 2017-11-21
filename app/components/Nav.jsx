@@ -8,6 +8,7 @@ class Nav extends Component {
         <a href="/"> Home </a>
         <a href="/menu"> Menu </a>
         <Link to="/itemCreate"> Create New Item </Link>
+        <Link to="/signup"> Sign Up </Link>
       </nav>
     )
   }
