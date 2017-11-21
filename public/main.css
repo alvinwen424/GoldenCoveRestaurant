@@ -12,6 +12,10 @@ img {
 	width: 100px;
 }
 
+canvas {
+	background: white;
+}
+
 button {
 	padding: 10px 0 10px 0;
 	margin: 10px 0 10px 0;

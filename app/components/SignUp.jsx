@@ -32,7 +32,7 @@ export default class SignUp extends Component {
 
     return (
       <div className="container">
-        <form>
+        <form onSubmit={this.onSubmit}>
           <div>
             <h4>Name: </h4>
             <input
