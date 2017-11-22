@@ -7,6 +7,7 @@ import Menu from './Menu'
 import ItemCreate from './ItemCreate'
 import SingleItem from './SingleItem'
 import SignUp from './SignUp'
+import Login from './Login'
 
 class Routes extends Component {
   render () {
@@ -19,6 +20,7 @@ class Routes extends Component {
             <Route path="/SingleItem/:id" component={SingleItem} />
             <Route path="/menu" component={Menu} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={Login} />
             <Route path="/" component={Home} />
             <Route path="*" component={NotFound} />
           </Switch>

@@ -7,7 +7,9 @@ import React, { Component } from 'react';
 class Home extends Component {
   render() {
     return (
-      <div>Welcome to Golden Cove Restaurant </div>
+      <div className="home">
+        <h1>Welcome to Golden Cove Restaurant</h1>
+      </div>
     )
   }
 }

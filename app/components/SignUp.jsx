@@ -72,7 +72,7 @@ class SignUp extends Component {
             </input>
           </div>
 
-          <button id="submit" className="btn btn-primary">Submit</button>
+          <button id="submit" className="btn btn-primary">Create Account</button>
         </form>
       </div>
     )

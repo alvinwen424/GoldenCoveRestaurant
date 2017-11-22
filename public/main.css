@@ -2,9 +2,17 @@ body {
 	background: lightyellow;
 }
 
-nav a {
+.home {
+	text-align: center;
+}
+
+nav div {
   display: inline-block;
   margin: 1em;
+}
+
+.div-right {
+	float: right;
 }
 
 img {
@@ -13,7 +21,11 @@ img {
 }
 
 canvas {
+	margin: 10px;
+	padding: 10px;
 	background: white;
+	border: 2px solid black;
+	border-radius: 5px;
 }
 
 button {

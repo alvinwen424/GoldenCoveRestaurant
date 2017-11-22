@@ -4,12 +4,17 @@ import { Link } from 'react-router-dom'
 class Nav extends Component {
   render() {
     return (
-      <nav className="navbar navbar-default">
-        <Link to="/"> Home </Link>
-        <Link to="/menu"> Menu </Link>
+      <nav className="navbar navbar-default navbar-dark">
+        <div className="div-left">
+          <Link to="/" className="navbar-brand"> Home </Link>
+          <Link to="/menu" className="navbar-brand"> Menu </Link>
+        </div>
 
-        <Link to="/itemCreate"> Create New Item </Link>
-        <Link to="/signup"> Sign Up </Link>
+        <div className="div-right">
+          <Link to="/itemCreate" className="navbar-brand"> Create New Item </Link>
+          <Link to="/login" className="navbar-brand"> Login </Link>
+          <Link to="/signup" className="navbar-brand"> Sign Up </Link>
+        </div>
       </nav>
     )
   }

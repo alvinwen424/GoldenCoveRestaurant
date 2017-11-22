@@ -30,17 +30,29 @@ class AddItem extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit} >
-          <label> Name </label>
-          <input
-            name="name"
-          />
-          <label> Content </label>
-          <input
-            name="content"
+          <div>
+            <h4>Name: </h4>
+            <input
+              type="text"
+              placeholder="Enter Name"
+              name="name"
+            >
+            </input>
+          </div>
+          <div>
+            <h4>Content: </h4>
+            <textarea
+              type="text"
+              rows="3" cols="100"
+              placeholder="Enter Content"
+              name="content"
             />
-          <button id="submit">Submit</button>
+          </div>
+          <button id="submit" className="btn btn-primary">Submit</button>
         </form>
-        <canvas id="myCanvas" width="200" height="100"></canvas>
+        <div>
+          <canvas id="myCanvas" width="200" height="100"></canvas>
+        </div>
       </div>
     )
   }
