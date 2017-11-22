@@ -15,9 +15,15 @@ class Menu extends Component {
         {menu.map(item => {
           return (
             <div key={item.id} className="menu-list-item">
+              <div>
                 <Link to={`/SingleItem/${item.id}`}><h2>{item.name}</h2></Link>
+              </div>
+              <div>
                 <img src="/img/sampleImage.png" className="products_image img-responsive img-center" />
+              </div>
+              <div>
                 <h4>{item.content}</h4>
+              </div>
             </div>
           )
         })}

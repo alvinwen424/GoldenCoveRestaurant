@@ -42,11 +42,21 @@ ul {
 	flex: 0 0 32%;
 	padding: 5px;
 	margin: 5px;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+.menu-list-item div {
+	height: 33%;
 }
 
 .single-item {
 	width: default;
 	background: white;
+	padding: 5px;
+	margin: 5px;
+	border: 2px solid black;
+	border-radius: 5px;
 }
 
 single-item-image {
