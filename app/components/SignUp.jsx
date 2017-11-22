@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import history from '../history'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
-export default class SignUp extends Component {
+class SignUp extends Component {
   constructor (){
     super()
     this.state = {
@@ -76,3 +78,14 @@ export default class SignUp extends Component {
     )
   }
 }
+
+const mutation = gql`
+mutation SignUp($email: String, $password: String, $name: String){
+  signup(email: $email, name: $name, password: $password ){
+    name
+    email
+  }
+}
+`
+
+export default graphql(mutation)(SignUp)
