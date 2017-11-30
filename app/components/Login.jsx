@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import history from '../history'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
-export default class Login extends Component {
+
+class Login extends Component {
   constructor (){
     super()
   }
@@ -11,9 +14,13 @@ export default class Login extends Component {
 
     const email = event.target.email.value
     const password = event.target.password.value
-
-    console.log('Email ', email, 'Password ', password)
-
+    this.props.mutate({
+      variables: {
+        email,
+        password
+      }
+    })
+    .then(() => history.push('/'))
   }
 
   render() {
@@ -46,3 +53,15 @@ export default class Login extends Component {
     )
   }
 }
+
+
+const mutation = gql`
+mutation Login($email: String, $password: String) {
+  login(email: $email, password: $password){
+    email
+    name
+  }
+}
+`
+
+export default graphql(mutation)(Login)
