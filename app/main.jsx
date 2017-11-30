@@ -11,10 +11,20 @@ import Routes from './components/Routes'
 import history from './history'
 
 
-import ApolloClient from 'apollo-client'
+import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 
+//Used to include cookies with Apollo
+const networkInterface = createNetworkInterface({
+  uri: '/graphql',
+  opts: {
+    //tells apollo client to send cookies along when making queries
+    credentials: 'same-origin'
+  }
+})
+
 const client = new ApolloClient({
+  networkInterface,
   dataIdFromObject: ob => ob.id
 })
 
