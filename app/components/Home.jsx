@@ -12,7 +12,7 @@ class Home extends Component {
     else {
       return (
         <div className="home">
-          <h1>Hi {user.name} </h1>
+          {user && <h1>Hi {user.name} </h1>}
           <h1>Welcome to Golden Cove Restaurant</h1>
         </div>
       )
