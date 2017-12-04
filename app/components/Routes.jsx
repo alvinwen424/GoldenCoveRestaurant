@@ -8,6 +8,7 @@ import ItemCreate from './ItemCreate'
 import SingleItem from './SingleItem'
 import SignUp from './SignUp'
 import Login from './Login'
+import Cart from './Cart'
 
 import { graphql } from 'react-apollo'
 import fetchUser from '../queries/fetchUser.js'
@@ -22,6 +23,7 @@ class Routes extends Component {
           <Nav user={user} />
           <div className="container">
             <Switch>
+              <Route path="/cart" component={Cart} />
               <Route path="/itemCreate" component={ItemCreate} />
               <Route path="/SingleItem/:id" component={SingleItem} />
               <Route path="/menu" component={Menu} />

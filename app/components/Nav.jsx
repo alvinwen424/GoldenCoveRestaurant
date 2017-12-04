@@ -25,6 +25,7 @@ class Nav extends Component {
         </div>
 
         <div className="div-right">
+          <Link to="/cart" className="navbar-brand"> Cart </Link>
           <Link to="/itemCreate" className="navbar-brand"> Create New Item </Link>
           { this.props.user ?
             <button onClick={this.logout} className="navbar-brand"> Logout </button> :
