@@ -18,6 +18,7 @@ const ItemType = new GraphQLObjectType({
     menu: {
       type: require('./menu_type'),
       resolve(parentValue) {
+        //The parentValue provides id of the item which can then be looked up in the menu table
         return Item.findById(parentValue).populate('menu')
           .then(item => {
             return item.menu

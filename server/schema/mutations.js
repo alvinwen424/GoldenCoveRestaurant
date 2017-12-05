@@ -2,11 +2,11 @@ const graphql = require('graphql')
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLNonNull } = graphql
 const mongoose = require('mongoose')
 const Menu = mongoose.model('menu')
+const Item = mongoose.model('item')
 const menuType = require('./menu_type')
 const UserType = require('./user_type')
 const AuthService = require('../services/auth')
-const Item = mongoose.model('item')
-const itemType = require('./item_type')
+const ItemType = require('./item_type')
 
 const mutation = new GraphQLObjectType({
   name: 'mutation',
@@ -23,16 +23,16 @@ const mutation = new GraphQLObjectType({
     //   }
     // },
     addItem: {
-      type: itemType,
+      type: ItemType,
       args: {
         name: { type: GraphQLString},
         content: { type: GraphQLString},
         smallPrice: { type: GraphQLString},
         largePrice: { type: GraphQLString},
-        categoryId: { type: GraphQLString}
+        menuId: { type: GraphQLID}
       },
-      resolve(parentValue, { name, content, smallPrice, largePrice }){
-        return (new Item({name, content, smallPrice, largePrice})).save()
+      resolve(parentValue, {menuId, name, content, smallPrice, largePrice }){
+        return Menu.addItem(menuId, name, content, smallPrice, largePrice)
       }
     },
     signup: {
