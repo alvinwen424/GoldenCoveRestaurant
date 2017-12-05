@@ -36,8 +36,7 @@ class Routes extends Component {
     })
     .then((foundUser) => {
       this.setState({
-        user: foundUser.data.login,
-        userName: foundUser.data.login.name
+        user: foundUser.data.login
       })
     })
     .then(() => history.push('/'))
@@ -47,12 +46,14 @@ class Routes extends Component {
     event.preventDefault()
     //Uses the mutation.js logout field to invoke req.logout()
     this.props.mutate({
-        refetchQueries: [{query: fetchUser}]
+      refetchQueries: [{query: fetchUser}]
+    })
+    .then(() => {
+      this.setState({
+        user: ''
       })
-    .then(() => this.setState({
-      user: ''
-    }))
-    .then(() => history.push('/'))
+      history.push('/')
+    })
   }
 
   render () {
@@ -97,4 +98,4 @@ mutation {
 }
 `
 
-export default (graphql(logoutMutation)(graphql(loginMutation)(graphql(fetchUser)(Routes))))
+export default graphql(logoutMutation)(graphql(loginMutation)(graphql(fetchUser)(Routes)))
