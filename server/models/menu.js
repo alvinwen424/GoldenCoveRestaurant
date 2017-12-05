@@ -19,7 +19,7 @@ MenuSchema.statics.addItem = function(menuId, name, content, smallPrice, largePr
       const item = new Item({ name, content, smallPrice, largePrice, menu: category})
       category.items.push(item)
       return Promise.all([category.save(), item.save()])
-        .then(([category, item]) => category)
+        .then(([category, item]) => item)
     })
 }
 
