@@ -14,7 +14,7 @@ const RootQuery = new GraphQLObjectType({
         return Menu.find({})
       }
     },
-    item: {
+    category: {
       type: MenuType,
       args: {id: {type: new GraphQLNonNull(GraphQLID)}},
       resolve(parentValue, { id }) {

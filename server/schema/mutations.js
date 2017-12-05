@@ -5,19 +5,34 @@ const Menu = mongoose.model('menu')
 const menuType = require('./menu_type')
 const UserType = require('./user_type')
 const AuthService = require('../services/auth')
+const Item = mongoose.model('item')
+const itemType = require('./item_type')
 
 const mutation = new GraphQLObjectType({
   name: 'mutation',
   fields: {
+    // addItem: {
+    //   type: menuType,
+    //   args: {
+    //     name: { type: GraphQLString },
+    //     content: { type: GraphQLString },
+    //     image: { type: GraphQLString }
+    //   },
+    //   resolve(parentValue, {name, content}) {
+    //     return (new Menu({name, content})).save()
+    //   }
+    // },
     addItem: {
-      type: menuType,
+      type: itemType,
       args: {
-        name: { type: GraphQLString },
-        content: { type: GraphQLString },
-        image: { type: GraphQLString }
+        name: { type: GraphQLString},
+        content: { type: GraphQLString},
+        smallPrice: { type: GraphQLString},
+        largePrice: { type: GraphQLString},
+        categoryId: { type: GraphQLString}
       },
-      resolve(parentValue, {name, content}) {
-        return (new Menu({name, content})).save()
+      resolve(parentValue, { name, content, smallPrice, largePrice }){
+        return (new Item({name, content, smallPrice, largePrice})).save()
       }
     },
     signup: {

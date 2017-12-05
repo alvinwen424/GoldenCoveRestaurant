@@ -27,4 +27,4 @@ const ItemType = new GraphQLObjectType({
   })
 })
 
-export default ItemType
+module.exports = ItemType

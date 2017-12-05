@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 const query = gql`
-query fetchItem($id: ID!){
-  item(id: $id){
+query fetchCategory($id: ID!){
+  category(id: $id){
     name
     content
     image

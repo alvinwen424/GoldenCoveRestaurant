@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import fetchItem from '../queries/fetchItem.js'
+import fetchCategory from '../queries/fetchCategory.js'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 
 class SingleItem extends Component {
 
   render() {
+    //The item is this.props.data is now category due to database change
     const { item } = this.props.data
     return (
       <div className="container">
@@ -37,7 +38,7 @@ class SingleItem extends Component {
   }
 }
 
-export default graphql(fetchItem, {
+export default graphql(fetchCategory, {
   //the props for the options the same as this.props in the class above
   options: (props) => {
     return {
