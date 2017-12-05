@@ -11,17 +11,16 @@ const ItemType = require('./item_type')
 const mutation = new GraphQLObjectType({
   name: 'mutation',
   fields: {
-    // addItem: {
-    //   type: menuType,
-    //   args: {
-    //     name: { type: GraphQLString },
-    //     content: { type: GraphQLString },
-    //     image: { type: GraphQLString }
-    //   },
-    //   resolve(parentValue, {name, content}) {
-    //     return (new Menu({name, content})).save()
-    //   }
-    // },
+    addCategory: {
+      type: menuType,
+      args: {
+        name: { type: GraphQLString },
+        content: { type: GraphQLString },
+      },
+      resolve(parentValue, {name, content}) {
+        return (new Menu({name, content})).save()
+      }
+    },
     addItem: {
       type: ItemType,
       args: {

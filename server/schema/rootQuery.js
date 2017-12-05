@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const graphql = require('graphql')
-const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = graphql
+const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull, GraphQLString } = graphql
 const MenuType = require('./menu_type')
 const Menu = mongoose.model('menu')
 const UserType = require('./user_type')
@@ -18,9 +18,9 @@ const RootQuery = new GraphQLObjectType({
     },
     category: {
       type: MenuType,
-      args: {id: {type: new GraphQLNonNull(GraphQLID)}},
-      resolve(parentValue, { id }) {
-        return Menu.findById(id)
+      args: {name: {type: new GraphQLNonNull(GraphQLString)}},
+      resolve(parentValue, { name }) {
+        return Menu.findOne({name})
       }
     },
     user: {

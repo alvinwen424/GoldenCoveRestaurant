@@ -7,7 +7,6 @@ const MenuType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     content: { type: GraphQLString },
-    image: { type: GraphQLString }
   })
 })
 
