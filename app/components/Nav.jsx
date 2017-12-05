@@ -6,17 +6,13 @@ import history from '../history'
 import fetchUser from '../queries/fetchUser.js'
 
 class Nav extends Component {
-
-  logout = () => {
-    console.log('logout')
-    //Uses the mutation.js logout field to invoke req.logout()
-    this.props.mutate({
-        refetchQueries: [{query: fetchUser}]
-      })
-    .then(() => history.push('/'))
+  constructor(props){
+    super(props)
   }
 
   render() {
+    const { user, logout } = this.props
+
     return (
       <nav className="navbar navbar-default navbar-dark">
         <div className="div-left">
@@ -26,8 +22,8 @@ class Nav extends Component {
 
         <div className="div-right">
           <Link to="/itemCreate" className="navbar-brand"> Create New Item </Link>
-          { this.props.user ?
-            <button onClick={this.logout} className="navbar-brand"> Logout </button> :
+          { user && user.name ?
+            <button className="navbar-brand" onClick={logout}> Logout </button> :
             <Link to="/login" className="navbar-brand"> Login </Link>
           }
           <Link to="/signup" className="navbar-brand"> Sign Up </Link>

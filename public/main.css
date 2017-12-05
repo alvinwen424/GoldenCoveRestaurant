@@ -76,5 +76,9 @@ single-item-image {
 	width: 500px;
 }
 
+.logout-btn {
+	display: inline-block;
+}
+
 
 

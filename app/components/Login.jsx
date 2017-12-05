@@ -5,8 +5,8 @@ import { graphql } from 'react-apollo'
 
 
 class Login extends Component {
-  constructor (){
-    super()
+  constructor (props){
+    super(props)
   }
 
   onSubmit = (event) => {
@@ -24,10 +24,9 @@ class Login extends Component {
   }
 
   render() {
-
     return (
       <div className="container">
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.props.login}>
           <div>
             <h4>Email: </h4>
             <input
