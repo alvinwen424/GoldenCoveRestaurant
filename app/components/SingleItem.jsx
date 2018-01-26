@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import fetchCategory from '../queries/fetchCategory.js'
+import fetchItem from '../queries/fetchItem'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,8 @@ class SingleItem extends Component {
     return (
       <div className="container">
         <div>
-          <h1><Link to="/menu">Back to Menu</Link></h1>
+          <h1><Link to="/menu">Back to Main Menu</Link></h1>
+          <h3><Link to={`/SingleCategory/${item.menu.id}`}> Back to category </Link></h3>
         </div>
         { item &&
           <div className="single-item col-large-4">
@@ -38,7 +39,7 @@ class SingleItem extends Component {
   }
 }
 
-export default graphql(fetchCategory, {
+export default graphql(fetchItem, {
   //the props for the options the same as this.props in the class above
   options: (props) => {
     return {

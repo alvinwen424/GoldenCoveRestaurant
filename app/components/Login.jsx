@@ -3,6 +3,7 @@ import history from '../history'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
+import query from '../queries/fetchUser'
 
 class Login extends Component {
   constructor (){
@@ -18,9 +19,16 @@ class Login extends Component {
       variables: {
         email,
         password
-      }
+      },
+      refetchQueries: [{ query }]
     })
     .then(() => history.push('/'))
+  }
+
+  conponentWillUpdate(nextProps){
+    if(!this.prop.data.user && nextProps.data.user){
+      history.push('/dashboard')
+    }
   }
 
   render() {
@@ -40,7 +48,7 @@ class Login extends Component {
           <div>
             <h4>Enter Password: </h4>
             <input
-              type="text"
+              type="password"
               placeholder="Enter Password"
               name="password"
             >
@@ -64,4 +72,4 @@ mutation Login($email: String, $password: String) {
 }
 `
 
-export default graphql(mutation)(Login)
+export default graphql(mutation)(graphql(query)(Login))

@@ -6,7 +6,6 @@ const query = gql`
     id
     name
     content
-    image
   }
 }
 `

@@ -5,10 +5,24 @@ import { graphql } from 'react-apollo'
 import history from '../history'
 import fetchUser from '../queries/fetchUser.js'
 
+
+import {  IconMenu,
+          IconButton,
+          FontIcon,
+          MenuItem,
+          DropDownMenu,
+          RaisedButton,
+          ToolBar } from 'material-ui'
+
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
+
+
+const { Toolbar, ToolbarGroup, ToolbarSeperator, ToolbarTitle } = Toolbar
+
 class Nav extends Component {
 
   logout = () => {
-    console.log('logout')
+    console.log('logout', this.props)
     //Uses the mutation.js logout field to invoke req.logout()
     this.props.mutate({
         refetchQueries: [{query: fetchUser}]
@@ -47,4 +61,6 @@ mutation {
 `
 
 
-export default graphql(mutation)(Nav)
+export default graphql(mutation)(
+                  graphql(fetchUser)(Nav)
+                )
