@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetchUser from '../queries/fetchUser.js'
 import { graphql } from 'react-apollo'
+import StillLoading from './StillLoading'
 
 //Homepage should render lunch menu when from 11-5
 //And render favorites any other times
@@ -8,7 +9,7 @@ import { graphql } from 'react-apollo'
 class Home extends Component {
   render() {
     const { user, loading } = this.props.data
-    if (loading){ return (<h1>Loading</h1>) }
+    if (loading){ return (<StillLoading />) }
     else {
       return (
         <div className="home">

@@ -56,7 +56,7 @@ class SignUp extends Component {
           <div>
             <h4>Enter Password: </h4>
             <input
-              type="text"
+              type="password"
               placeholder="Enter Password"
               name="passwordOne"
             >
@@ -65,7 +65,7 @@ class SignUp extends Component {
           <div>
             <h4>Re-enter Password: </h4>
             <input
-              type="text"
+              type="password"
               placeholder="Re-enter Password"
               name="passwordTwo"
             >

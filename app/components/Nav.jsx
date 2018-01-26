@@ -5,21 +5,11 @@ import { graphql } from 'react-apollo'
 import history from '../history'
 import fetchUser from '../queries/fetchUser.js'
 
-
-import {  IconMenu,
-          IconButton,
-          FontIcon,
-          MenuItem,
-          DropDownMenu,
-          RaisedButton,
-          ToolBar } from 'material-ui'
-
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more'
-
-
-const { Toolbar, ToolbarGroup, ToolbarSeperator, ToolbarTitle } = Toolbar
+import { Menu, Segment } from 'semantic-ui-react'
+const { Item } = Menu
 
 class Nav extends Component {
+
 
   logout = () => {
     console.log('logout', this.props)
@@ -32,22 +22,15 @@ class Nav extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-default navbar-dark">
-        <div className="div-left">
-          <Link to="/" className="navbar-brand"> Home </Link>
-          <Link to="/menu" className="navbar-brand"> Menu </Link>
-        </div>
-
-        <div className="div-right">
-          <Link to="/cart" className="navbar-brand"> Cart </Link>
-          <Link to="/itemCreate" className="navbar-brand"> Create New Item </Link>
-          { this.props.user ?
-            <button onClick={this.logout} className="navbar-brand"> Logout </button> :
-            <Link to="/login" className="navbar-brand"> Login </Link>
-          }
-          <Link to="/signup" className="navbar-brand"> Sign Up </Link>
-        </div>
-      </nav>
+      <Menu pointing secondary>
+        <Item href='/' name='home'/>
+        <Item href='/menu' name='menu'/>
+        <Menu.Menu position='right'>
+          { this.props.data.user && (<Item name='logout' onClick={this.logout} />) }
+          { !this.props.data.user && <Item href='/login' name='login'/> }
+          { !this.props.data.user && <Item href='/signup'name='signup'/>}
+        </Menu.Menu>
+      </Menu>
     )
   }
 }
@@ -60,7 +43,7 @@ mutation {
 }
 `
 
-
+// this makes sure the tha nevbar reflect the corect thing
 export default graphql(mutation)(
                   graphql(fetchUser)(Nav)
                 )

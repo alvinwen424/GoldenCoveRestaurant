@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import fetchCategory from '../queries/fetchCategory.js'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
+import { Card } from 'semantic-ui-react'
+import StillLoading from './StillLoading'
+import ItemCard from './ItemCard'
+
 
 class SingleCategory extends Component {
-
   render() {
     //The item is this.props.data is now category due to database change
-    if(this.props.data.loading) return <div>Loading</div>
+    if (this.props.data.loading) return <StillLoading />
     const { category,error } = this.props.data
     if ( error ) return <div>{ error.message }</div>
     return (
@@ -16,23 +19,13 @@ class SingleCategory extends Component {
           <h1><Link to="/menu">Back to Menu</Link></h1>
           <h3>{ category.name}</h3>
         </div>
+        <Card.Group itemPerRow={3}>
         {
-          category && category.items.map(({ id, name, content} ) => {
-            return (
-              <div key={id} className="menu-list-item">
-                <div>
-                  <Link to={`/SingleItem/${id}`}><h2>{name}</h2></Link>
-                </div>
-                <div>
-                  <img src="/img/sampleImage.png" className="products_image img-responsive img-center" />
-                </div>
-                <div>
-                  <h4>{content}</h4>
-                </div>
-              </div>
-            )
-          })
+          category.items.map(item => (
+            <ItemCard {...item} key={item.id} />
+            ))
         }
+        </Card.Group>
       </div>
     )
   }
