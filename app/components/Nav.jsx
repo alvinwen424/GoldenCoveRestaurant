@@ -9,7 +9,20 @@ import { Menu, Segment } from 'semantic-ui-react'
 const { Item } = Menu
 
 class Nav extends Component {
-
+  toolbarRight(){
+    const { user } = this.props.data;
+    if (user){
+      return ([
+        <Item name={`Hello ${user.name}`} /> ,
+        <Item name='logout' onClick={this.logout} />
+      ])
+    } else {
+      return ([
+        <Item href='/login' name='login'/> ,
+        <Item href='/signup'name='signup'/>
+      ])
+    }
+  }
 
   logout = () => {
     console.log('logout', this.props)
@@ -21,14 +34,13 @@ class Nav extends Component {
   }
 
   render() {
+    const { user } = this.props.data
     return (
       <Menu pointing secondary>
         <Item href='/' name='home'/>
         <Item href='/menu' name='menu'/>
         <Menu.Menu position='right'>
-          { this.props.data.user && (<Item name='logout' onClick={this.logout} />) }
-          { !this.props.data.user && <Item href='/login' name='login'/> }
-          { !this.props.data.user && <Item href='/signup'name='signup'/>}
+          { this.toolbarRight() }
         </Menu.Menu>
       </Menu>
     )

@@ -10,6 +10,7 @@ import SignUp from './SignUp'
 import Login from './Login'
 import Cart from './Cart'
 import SingleCategory from './SingleCategory'
+import StillLoading from './StillLoading'
 
 import { graphql } from 'react-apollo'
 import fetchUser from '../queries/fetchUser.js'
@@ -17,7 +18,7 @@ import fetchUser from '../queries/fetchUser.js'
 class Routes extends Component {
   render () {
     const { user, loading } = this.props.data
-    if (loading) return <h1> loading </h1>
+    if (loading) return <StillLoading />
     else {
     return (
         <div>
