@@ -8,26 +8,25 @@ class SignUp extends Component {
     super()
     this.state = {
       name: "",
-      content: ""
+      email: "",
+      password: "",
+      passwordTwo: "",
     }
   }
 
   onSubmit = (event) => {
     event.preventDefault()
-    const passwordOne = event.target.passwordOne.value
+    const passwordOne = event.target.password.value
     const passwordTwo = event.target.passwordTwo.value
-    if (passwordOne !== passwordTwo) return 'Password does not match!'
+    if (password !== passwordTwo) return 'Password does not match!'
 
     this.props.mutate({
-      variables: {
-        name: event.target.name.value,
-        email: event.target.email.value,
-        password: event.target.passwordOne.value
-      },
-      // refetchQueries: [{query: fetchMenu }]
+      variables: {...this.state}
     })
     .then(() => history.push("/"))
   }
+
+  onChange = ({target}) => { this.setState({ [target.name]: target.value }) }
 
 
   render() {
@@ -41,6 +40,8 @@ class SignUp extends Component {
               type="text"
               placeholder="Enter Name"
               name="name"
+              value={this.state.name}
+              onChange={this.onChange}
             >
             </input>
           </div>
@@ -50,6 +51,8 @@ class SignUp extends Component {
               type="text"
               placeholder="Enter Email"
               name="email"
+              value={this.state.email}
+              onChange={this.onChange}
             >
             </input>
           </div>
@@ -58,7 +61,9 @@ class SignUp extends Component {
             <input
               type="password"
               placeholder="Enter Password"
-              name="passwordOne"
+              name="password"
+              value={this.state.password}
+              onChange={this.onChange}
             >
             </input>
           </div>
@@ -68,6 +73,8 @@ class SignUp extends Component {
               type="password"
               placeholder="Re-enter Password"
               name="passwordTwo"
+              value={this.state.passwordTwo}
+              onChange={this.onChange}
             >
             </input>
           </div>

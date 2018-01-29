@@ -3,31 +3,30 @@ import history from '../history'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
-import query from '../queries/fetchUser'
+// import query from '../queries/fetchUser'
 
 class Login extends Component {
-  constructor (){
-    super()
+  constructor (props){
+    super(props)
+    this.state = {
+      email: "",
+      password: ""
+    }
   }
 
-  onSubmit = (event) => {
-    event.preventDefault()
+  onChange = ((event, {name, value}) => this.setState({ [name]: value }));
 
-    const email = event.target.email.value
-    const password = event.target.password.value
+  onSubmit = (event) => {
+    event.preventDefault();
     this.props.mutate({
-      variables: {
-        email,
-        password
-      },
-      refetchQueries: [{ query }]
+      variables: {...this.state}
     })
     .then(() => history.push('/'))
   }
 
   conponentWillUpdate(nextProps){
     if(!this.prop.data.user && nextProps.data.user){
-      history.push('/dashboard')
+      history.push('/')
     }
   }
 
@@ -72,4 +71,4 @@ mutation Login($email: String, $password: String) {
 }
 `
 
-export default graphql(mutation)(graphql(query)(Login))
+export default graphql(mutation)(Login)

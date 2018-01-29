@@ -13,15 +13,13 @@ class CustomMenu extends Component {
   render(){
     if (this.props.data.loading) return <StillLoading />
     const { category, error } = this.props.data
-    const { lunchTime } = this.props
     if ( error ) return <div>{ error.message }</div>
     return (
       <div className="container">
         <div>
           <h1>{ category.name}</h1>
-          <h2>It is {!lunchTime && "not"} lunch time </h2>
         </div>
-        <Card.Group itemsPerRow={3}>
+        <Card.Group itemsPerRow={4}>
         {
           category.items.map(item => (
             <ItemCard {...item} key={item.id} />

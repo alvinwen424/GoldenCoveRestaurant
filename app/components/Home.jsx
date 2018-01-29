@@ -5,8 +5,8 @@ import StillLoading from './StillLoading'
 import CustomMenu from './CustomMenu'
 //Homepage should render lunch menu when from 11-5
 //And render favorites any other times
-const FavouritesId = "5a270c369f7a9be16ffedd81"
-const LunchId = "5a270c369f7a9be16ffedd82"
+const FavouritesId = "5a270cd39f7a9be16ffedd87"
+const LunchId = "5a270c369f7a9be16ffedd81"
 
 class Home extends Component {
   constructor(props) {
@@ -31,6 +31,7 @@ class Home extends Component {
     const id = lunchTime ? LunchId : FavouritesId
     this.setState({ lunchTime, id });
   }
+
   render() {
     const { user, loading } = this.props.data
     if (loading) return <StillLoading />

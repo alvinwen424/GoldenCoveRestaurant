@@ -4,101 +4,81 @@ import { graphql } from 'react-apollo'
 import fetchMenu from '../queries/fetchMenu.js'
 // import { BrowserHistory as history} from 'react-router-dom'
 import history from '../history'
+import StillLoading from './StillLoading'
+import { Form, TextArea } from 'semantic-ui-react'
+
+const { Input, Select, Button, Group, Field} = Form;
 
 class AddItem extends Component {
   constructor (){
     super()
     this.state = {
       name: "",
-      content: ""
+      content: "",
+      category: "",
+      largePrice: "",
+      smallPrice: "",
     }
   }
 
-  onSubmit = (e) => {
-    e.preventDefault()
-    const {name, content, smallPrice, largePrice, category} = e.target
+  onChange = (event, {name, value}) => {
+    console.log(name, value);
+    this.setState({[name]: value});
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state)
     this.props.mutate({
-      variables: {
-        name: name.value,
-        content: content.value,
-        smallPrice: smallPrice.value,
-        largeprice: largeprice.value
-      },
-      refetchQueries: [{query: fetchMenu }]
+      variables: {...this.state},
     })
     .then(() => history.push("/menu"))
   }
 
   render() {
+    if (this.props.data.loading) return <StillLoading />
+    const { menu } = this.props.data;
+    const options = menu.map(({name, id}) => {
+      return ({ key: id, value: id, text: name })
+    })
     return (
-      <div>
-        <form onSubmit={this.onSubmit} >
-          <div>
-            <h4>Name: </h4>
-            <input
-              type="text"
-              placeholder="Enter Name"
-              name="name"
-            >
-            </input>
-          </div>
-          <div>
-            <h4>Content: </h4>
-            <textarea
-              type="text"
-              rows="3" cols="100"
-              placeholder="Enter Content"
-              name="content"
-            />
-          </div>
-          <div>
-            <h4>Small Price: </h4>
-            <textarea
-              type="text"
-              rows="3" cols="100"
-              placeholder="Enter Small Price"
-              name="smallPrice"
-            />
-          </div>
-          <div>
-            <h4>Large Price: </h4>
-            <textarea
-              type="text"
-              rows="3" cols="100"
-              placeholder="Enter Large Price"
-              name="largePrice"
-            />
-          </div>
-          <div>
-            <h4>Category: </h4>
-            <select>
-              <option name="Category" value="Beef">Beef</option>
-              <option name="Category" value="Poultry">Poultry</option>
-              <option name="Category" value="Soups">Soups</option>
-              <option name="Category" value="Appetizers">Appetizers</option>
-              <option name="Category" value="Moo Shi Specialties">Moo Shi Specialties</option>
-              <option name="Category" value="Pork">Pork</option>
-              <option name="Category" value="Vegatables">Vegatables</option>
-              <option name="Category" value="Seafood">Seafood</option>
-              <option name="Category" value="Chow Fun">Chow Fun</option>
-              <option name="Category" value="Fried Rice">Fried Rice</option>
-              <option name="Category" value="Lo Mein">Lo Mein</option>
-              <option name="Category" value="Chow Mein">Chow Mein</option>
-              <option name="Category" value="Sweet and Sour">Sweet and Sour</option>
-              <option name="Category" value="Diet Menu">Diet Menu</option>
-              <option name="Category" value="Chef's Specialties">Chef's Specialties</option>
-              <option name="Category" value="Combination Platters">combination Platters</option>
-              <option name="Category" value="Sides">Sides</option>
-              <option name="Category" value="Lunch Specials">Lunch Specials</option>
-              <option name="Category" value="Egg Foo Young">Egg Foo Young</option>
-            </select>
-          </div>
-          <button id="submit" className="btn btn-primary">Submit</button>
-        </form>
-        <div>
-          <canvas id="myCanvas" width="200" height="100"></canvas>
-        </div>
-      </div>
+      <Form onSubmit={this.onSubmit}>
+        <Input
+          name="name"
+          label="Name"
+          placeholder ="Enter name"
+          onChange={this.onChange}
+        />
+        <Form.Field
+          control={TextArea}
+          name="content"
+          label="Content"
+          placeholder="Enter Content"
+          onChange={this.onChange}
+        />
+        <Select
+          options={options}
+          name="category"
+          label="Category"
+          placeholder="Category"
+          onChange={this.onChange}
+        />
+        <Group inline>
+          <Input
+            name="smallPrice"
+            label="Small Price"
+            placeholder="Enter small price"
+            onChange={this.onChange}
+          />
+          <Input
+            name="largePrice"
+            label="Large Price"
+            placeholder="Enter large price"
+            onChange={this.onChange}
+          />
+        </Group>
+        <Field control={Button}> Submit </Field>
+      </Form>
     )
   }
 }
@@ -109,13 +89,13 @@ mutation AddItem(
   $content: String,
   $smallPrice: String,
   $largePrice: String,
-  $menuId: ID){
+  $category: ID){
   addItem(
     name: $name,
     content: $content,
     smallPrice: $smallPrice,
     largePrice: $largePrice,
-    menuId: $menuId) {
+    menuId: $category) {
       id
       name
       content
@@ -125,4 +105,4 @@ mutation AddItem(
 }
 `
 
-export default graphql(mutation)(AddItem)
+export default graphql(fetchMenu)(graphql(mutation)(AddItem));

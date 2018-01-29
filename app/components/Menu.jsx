@@ -13,7 +13,7 @@ const Menu = ({ data }) => {
   return (
     <div>
       <div><h1>Menu</h1></div>
-      <Card.Group itemsPerRow={3}>
+      <Card.Group itemsPerRow={4}>
         {
           menu.map(category => (
             <CategoryCard {...category} key={category.id} />
