@@ -5,7 +5,7 @@ import fetchMenu from '../queries/fetchMenu.js'
 // import { BrowserHistory as history} from 'react-router-dom'
 import history from '../history'
 import StillLoading from './StillLoading'
-import { Form, TextArea } from 'semantic-ui-react'
+import { Form, TextArea, Message } from 'semantic-ui-react'
 
 const { Input, Select, Button, Group, Field} = Form;
 
@@ -18,21 +18,25 @@ class AddItem extends Component {
       category: "",
       largePrice: "",
       smallPrice: "",
+      errorFlag: false,
+      errors: [],
     }
   }
 
   onChange = (event, {name, value}) => {
-    console.log(name, value);
     this.setState({[name]: value});
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state)
     this.props.mutate({
       variables: {...this.state},
     })
     .then(() => history.push("/menu"))
+    .catch((response) => {
+      const errors = response.graphQLErrors.maps(({message}) => message);
+      this.setState({ errors, errorFlag: true })
+    })
   }
 
   render() {
@@ -42,14 +46,16 @@ class AddItem extends Component {
       return ({ key: id, value: id, text: name })
     })
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit} error={this.state.errorFlag}>
         <Input
+         required
           name="name"
           label="Name"
           placeholder ="Enter name"
           onChange={this.onChange}
         />
         <Form.Field
+          required
           control={TextArea}
           name="content"
           label="Content"
@@ -57,6 +63,7 @@ class AddItem extends Component {
           onChange={this.onChange}
         />
         <Select
+          required
           options={options}
           name="category"
           label="Category"
@@ -65,18 +72,29 @@ class AddItem extends Component {
         />
         <Group inline>
           <Input
+            required
             name="smallPrice"
             label="Small Price"
             placeholder="Enter small price"
             onChange={this.onChange}
           />
           <Input
+            required
             name="largePrice"
             label="Large Price"
             placeholder="Enter large price"
             onChange={this.onChange}
           />
         </Group>
+        {
+          this.state.errors.map((message) => {
+            return <Message
+              error
+              header="graphql error"
+              content={message}
+            />
+          })
+        }
         <Field control={Button}> Submit </Field>
       </Form>
     )
