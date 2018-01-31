@@ -22,5 +22,11 @@ MenuSchema.statics.addItem = function(menuId, name, content, smallPrice, largePr
     })
 }
 
+MenuSchema.statics.findItems = function(id){
+  return this.findById(id)
+  .populate('items')
+  .then((foundMenu) => foundMenu.items)
+}
+
 mongoose.model('menu', MenuSchema)
 

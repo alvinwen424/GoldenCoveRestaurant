@@ -1,36 +1,27 @@
 import React, { Component } from 'react';
 import fetchMenu from '../queries/fetchMenu.js'
 import { graphql } from 'react-apollo'
-import { Link } from 'react-router-dom'
 
-class Menu extends Component {
+import { Card } from 'semantic-ui-react'
+import CategoryCard from './CategoryCard'
+import StillLoading from './StillLoading'
 
-  render() {
-  if (this.props.data.loading){ return <div>loading</div>}
-    const { menu } = this.props.data
-    return (
-      <div>
-        <div><h1>Menu</h1></div>
-        <div className="menu-list">
-        {menu.map(item => {
-          return (
-            <div key={item.id} className="menu-list-item">
-              <div>
-                <Link to={`/SingleItem/${item.id}`}><h2>{item.name}</h2></Link>
-              </div>
-              <div>
-                <img src="/img/sampleImage.png" className="products_image img-responsive img-center" />
-              </div>
-              <div>
-                <h4>{item.content}</h4>
-              </div>
-            </div>
-          )
-        })}
-        </div>
-      </div>
-    )
-  }
+const Menu = ({ data }) => {
+  if (data.loading) return <StillLoading />
+  const { menu, error } = data
+  if ( error ) return <div> { error.message } </div>
+  return (
+    <div>
+      <div><h1>Menu</h1></div>
+      <Card.Group itemsPerRow={4}>
+        {
+          menu.map(category => (
+            <CategoryCard {...category} key={category.id} />
+          ))
+        }
+      </Card.Group>
+    </div>
+  )
 }
 
 export default graphql(fetchMenu)(Menu)

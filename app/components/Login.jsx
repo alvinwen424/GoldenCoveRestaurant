@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import history from '../history'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { Form, Message } from 'semantic-ui-react';
+import query from '../queries/fetchUser'
 
+const { Input, Button, Field } = Form;
 
 class Login extends Component {
   constructor (){
@@ -18,37 +21,36 @@ class Login extends Component {
       variables: {
         email,
         password
-      }
+      },
+      refetchQueries: [{ query }]
     })
     .then(() => history.push('/'))
+  }
+
+  conponentWillUpdate(nextProps){
+    if(!this.prop.data.user && nextProps.data.user){
+      history.push('/')
+    }
   }
 
   render() {
 
     return (
       <div className="container">
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <h4>Email: </h4>
-            <input
-              type="text"
-              placeholder="Enter Email"
-              name="email"
-            >
-            </input>
-          </div>
-          <div>
-            <h4>Enter Password: </h4>
-            <input
-              type="text"
-              placeholder="Enter Password"
-              name="password"
-            >
-            </input>
-          </div>
-
-          <button id="submit" className="btn btn-primary">Login</button>
-        </form>
+        <Form onSubmit={this.onSubmit}>
+          <Input
+            label="Email:"
+            placeholder="Enter email"
+            name="email"
+          />
+          <Input
+            type='password'
+            label="password"
+            placeholder="password"
+            name="password"
+          />
+          <Button type='submit'>Submit</Button>
+        </Form>
       </div>
     )
   }
@@ -64,4 +66,4 @@ mutation Login($email: String, $password: String) {
 }
 `
 
-export default graphql(mutation)(Login)
+export default graphql(mutation)(graphql(query)(Login))

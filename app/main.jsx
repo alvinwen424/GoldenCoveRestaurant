@@ -7,7 +7,7 @@ import { render } from 'react-dom';
 import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import store from './store';
-import Routes from './components/Routes'
+import Routes from './routes'
 import history from './history'
 
 

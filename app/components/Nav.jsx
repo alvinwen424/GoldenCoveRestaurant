@@ -5,10 +5,30 @@ import { graphql } from 'react-apollo'
 import history from '../history'
 import fetchUser from '../queries/fetchUser.js'
 
+import { Menu, Segment } from 'semantic-ui-react'
+const { Item } = Menu
+
 class Nav extends Component {
+  toolbarRight(){
+    const { user } = this.props.data;
+    if (user){
+      return ([
+        <Item name={`Hello ${user.name}`} /> ,
+        <Item href='/cart' name='cart' />,
+        <Item href='/itemCreate' name='Item Create' />,
+        <Item name='logout' onClick={this.logout} />
+      ])
+    } else {
+      return ([
+        <Item href='/cart' name='cart' />,
+        <Item href='/login' name='login'/>,
+        <Item href='/signup'name='signup'/>
+      ])
+    }
+  }
 
   logout = () => {
-    console.log('logout')
+    console.log('logout', this.props)
     //Uses the mutation.js logout field to invoke req.logout()
     this.props.mutate({
         refetchQueries: [{query: fetchUser}]
@@ -17,23 +37,15 @@ class Nav extends Component {
   }
 
   render() {
+    const { user } = this.props.data
     return (
-      <nav className="navbar navbar-default navbar-dark">
-        <div className="div-left">
-          <Link to="/" className="navbar-brand"> Home </Link>
-          <Link to="/menu" className="navbar-brand"> Menu </Link>
-        </div>
-
-        <div className="div-right">
-          <Link to="/cart" className="navbar-brand"> Cart </Link>
-          <Link to="/itemCreate" className="navbar-brand"> Create New Item </Link>
-          { this.props.user ?
-            <button onClick={this.logout} className="navbar-brand"> Logout </button> :
-            <Link to="/login" className="navbar-brand"> Login </Link>
-          }
-          <Link to="/signup" className="navbar-brand"> Sign Up </Link>
-        </div>
-      </nav>
+      <Menu pointing secondary>
+        <Item href='/' name='home'/>
+        <Item href='/menu' name='menu'/>
+        <Menu.Menu position='right'>
+          { this.toolbarRight() }
+        </Menu.Menu>
+      </Menu>
     )
   }
 }
@@ -46,5 +58,7 @@ mutation {
 }
 `
 
-
-export default graphql(mutation)(Nav)
+// this makes sure the tha nevbar reflect the corect thing
+export default graphql(mutation)(
+                  graphql(fetchUser)(Nav)
+                )

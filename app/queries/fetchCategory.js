@@ -3,9 +3,14 @@ import gql from 'graphql-tag'
 const query = gql`
 query fetchCategory($id: ID!){
   category(id: $id){
+    id
     name
     content
-    image
+    items {
+      name
+      content
+      id
+    }
   }
 }
 `

@@ -18,9 +18,9 @@ const RootQuery = new GraphQLObjectType({
     },
     category: {
       type: MenuType,
-      args: {name: {type: new GraphQLNonNull(GraphQLString)}},
-      resolve(parentValue, { name }) {
-        return Menu.findOne({name})
+      args: {id: { type: new GraphQLNonNull(GraphQLID) }},
+      resolve(parentValue, { id }) {
+        return Menu.findById(id)
       }
     },
     user: {
