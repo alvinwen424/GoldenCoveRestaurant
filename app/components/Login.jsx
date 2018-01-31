@@ -29,7 +29,7 @@ class Login extends Component {
 
   conponentWillUpdate(nextProps){
     if(!this.prop.data.user && nextProps.data.user){
-      history.push('/dashboard')
+      history.push('/')
     }
   }
 

@@ -14,11 +14,14 @@ class Nav extends Component {
     if (user){
       return ([
         <Item name={`Hello ${user.name}`} /> ,
+        <Item href='/cart' name='cart' />,
+        <Item href='/itemCreate' name='Item Create' />,
         <Item name='logout' onClick={this.logout} />
       ])
     } else {
       return ([
-        <Item href='/login' name='login'/> ,
+        <Item href='/cart' name='cart' />,
+        <Item href='/login' name='login'/>,
         <Item href='/signup'name='signup'/>
       ])
     }
