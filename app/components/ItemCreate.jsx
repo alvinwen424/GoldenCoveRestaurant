@@ -39,11 +39,17 @@ class AddItem extends Component {
     })
   }
 
+
   render() {
     if (this.props.data.loading) return <StillLoading />
     const { menu } = this.props.data;
     const options = menu.map(({name, id}) => {
       return ({ key: id, value: id, text: name })
+    }).sort((a, b) => {
+      const aName = a.text.toLowerCase();
+      const bName = b.text.toLowerCase();
+      if (aName == bName) return 0;
+      return (aName < bName) ? -1 : 1;
     })
     return (
       <Form onSubmit={this.onSubmit} error={this.state.errorFlag}>

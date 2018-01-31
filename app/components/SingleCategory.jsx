@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import fetchCategory from '../queries/fetchCategory.js'
-import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 
-import StillLoading from './StillLoading'
 import CustomMenu from './CustomMenu'
 
 class SingleCategory extends Component {
